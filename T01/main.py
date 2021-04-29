@@ -14,7 +14,7 @@ class Generators(Enum):
   GENERATOR_5 = GeneratorOp(5)
 
 def random_walk(size: int, seed: int) -> np.ndarray:
-  image: np.ndarray = np.zeros((size, size), dtype=np.float64)
+  image: np.ndarray = np.zeros((size, size), dtype=np.float32)
   number_of_steps: int = 1 + size**2
   x: int = 0
   y: int = 0
@@ -47,21 +47,21 @@ def generate_image(size: int, F: Generators, **kwargs) -> np.ndarray:
   if (F == Generators.GENERATOR_1):
     image = np.array([[(x*y + 2*y)
                        for y in range(size)]
-                       for x in range(size)], dtype=np.float64)
+                       for x in range(size)], dtype=np.float32)
 
   elif (F == Generators.GENERATOR_2):
     image = np.array([[abs(cos(x/Q) + 2*sin(y/Q))
                       for y in range(size)]
-                      for x in range(size)], dtype=np.float64)
+                      for x in range(size)], dtype=np.float32)
     
   elif (F == Generators.GENERATOR_3):
     image = np.array([[abs(3*x/Q - (y/Q)**(1/3)) 
                        for y in range(size)] 
-                       for x in range(size)], dtype=np.float64)
+                       for x in range(size)], dtype=np.float32)
   
   elif (F == Generators.GENERATOR_4):
     rand = random.Random(S)
-    image = np.zeros((size, size), dtype=np.float64)
+    image = np.zeros((size, size), dtype=np.float32)
     for i in range(size):
       for j in range(size):
         image[j][i] = rand.random()
@@ -88,7 +88,7 @@ def normalize_image(image: np.ndarray, new_min: float, new_max: float) -> np.nda
 def sample_image(image: np.ndarray, output_size: int) -> np.ndarray:
   input_size: int = image.shape[0]
   scale: float = input_size/output_size
-  sampled: np.ndarray = np.zeros((output_size, output_size), dtype=np.float64)
+  sampled: np.ndarray = np.zeros((output_size, output_size), dtype=np.float32)
 
   for i in range(0, output_size):
     for j in range(0, output_size):
