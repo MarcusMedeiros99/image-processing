@@ -155,7 +155,7 @@ def RSE(image: np.ndarray, reference: np.ndarray) -> float:
   return sqrt(error)
 
 def __main__():
-  filename = "T01/imagens_de_referência/"+input().rstrip()
+  filename = input().rstrip()
   R = np.load(filename)
   C = int(input())
   F = int(input())
